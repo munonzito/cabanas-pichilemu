@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="w-full h-96 flex flex-col items-center relative">
-                <div class="w-80 h-72 rounded-lg shadow-lg relative group">
-                    <img :src="photo" class="w-80 h-72 object-cover rounded-lg" alt=""/>
+                <div class="w-72 h-72 rounded-lg shadow-lg relative group lg:w-80">
+                    <img :src="photo" class="w-72 h-72 object-cover rounded-lg lg:w-80" alt=""/>
                     <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 rounded-lg cursor-pointer">
                         <span class="text-white font-semibold">Ver más</span>
                     </div>
@@ -11,7 +11,7 @@
                         <span class="text-xs ml-0.5 mt-0.5">Verificada</span>
                     </div>
                 </div>
-                <div class="w-80 mt-2">
+                <div class="w-72 mt-2 lg:w-80">
                 <h2 class="text-black font-semibold">{{  title  }}</h2>
                 <p class="text-gray-500">{{  description  }}</p>
                 </div>
