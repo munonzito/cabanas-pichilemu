@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLink :to="`/cabanas/brisas_del_mar`" class="w-full h-96 flex flex-col items-center relative">
+        <NuxtLink :to="`/cabanas/` + name_id" class="w-full h-96 flex flex-col items-center relative">
             <div class="w-72 h-72 rounded-lg shadow-lg relative group lg:w-80">
                 <img :src="photo" class="w-72 h-72 object-cover rounded-lg lg:w-80" alt=""/>
                 <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 rounded-lg cursor-pointer">
@@ -23,6 +23,7 @@
 defineProps({
     title: String,
     description: String,
+    name_id: String,
     photo: String
 })
 </script>
