@@ -42,7 +42,7 @@
     </div>
        
         <div class="flex justify-center p-5">
-            <div class="w-full lg:grid lg:grid-cols-4 lg:gap-5 md:grid md:grid-cols-2 md:gap-5 sm:flex sm:items-center sm:justify-center">
+            <div class="w-full xl:grid-cols-4 lg:grid-cols-2 md:grid md:grid-cols-2 md:gap-5 sm:flex sm:items-center sm:justify-center">
                 <ItemCard v-for="item in items" :title="item.title" :name_id="item.name_id" :photo="item.photos[0]" :description="item.description.substring(0,100) + '...'"/>
             </div>
         </div>
@@ -51,7 +51,11 @@
 </template>
 
 <script setup>
-
+defineOgImageComponent('Nuxt', {
+  headline: 'Portal',
+  title: 'Cabañas Pichilemu 👋',
+  description: 'Arrienda cabañas seguras y confiables en Pichilemu.',
+})
 const items = await $fetch('/api/cabanas/get_all')
 
 //Sidebar

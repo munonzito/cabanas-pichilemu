@@ -8,9 +8,9 @@
         <div ref="scrollContainer" class="overflow-x-hidden lg:hidden" @mousedown="onMouseDown"
     @touchstart="onMouseDown" @click="handleCarrousel">
             <div class="flex items-center justify-start w-full lg:hidden">
-                <img class="w-full h-72 rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
-                <img class="w-full h-72 rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
-                <img class="w-full h-72 rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
+                <img class="w-full h-72 rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[0]" />
+                <img class="w-full h-72 rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[1]"/>
+                <img class="w-full h-72 rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[2]" />
 
             </div>
         </div>
@@ -18,8 +18,8 @@
         <div class="w-full flex flex-col items-center justify-center p-5">
 
             <!-- Desktop Images -->
-            <div @click="handleCarrousel" class="w-full lg:w-[1024px]">
-                <div class="flex items-center justify-center w-full">
+            <div class="w-full lg:w-[1024px]">
+                <div @click="handleCarrousel" class="flex items-center justify-center w-full">
                     <img class="hidden w-full h-72 rounded-lg lg:flex lg:w-[600px] lg:h-[392px] shadow-lg mr-2 object-cover  lg:rounded-none lg:rounded-l-lg" :src="cabana.photos[0]" />
                     
                     <div class="hidden grid-cols-2 gap-2 lg:grid">
@@ -35,6 +35,11 @@
                     <span class="text-md ml-0.5">Verificada</span>
                 </div>
                 <p class="text-gray-500">{{ cabana.description }}</p>
+                
+                <button @click="onWhatsapp" class="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none mt-5">
+                    <Icon name="material-symbols:phone-android" size="20px" class="text-white mr-2"/>
+                    Contacto
+                </button>
                 <!-- divider-->
                 <div class="border-b-2 border-gray-200 my-5"></div>
                 <!-- Ubicación y Mapa -->
@@ -59,11 +64,11 @@
             </div>
             <div class="flex items-center justify-start w-max py-12 px-5">
                 
-                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
-                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
-                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
-                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
-                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" src="https://lh3.googleusercontent.com/p/AF1QipM8VFcDogp1OKZ0gpHw3u_kbPu2AGL7J5ou4zTg=s1360-w1360-h1020" />
+                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[0]" />
+                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[1]" />
+                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[2]">
+                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[3]" />
+                <img class="w-96 md:w-[800px] rounded-lg shadow-lg mr-2 object-cover" :src="cabana.photos[4]" />
             </div>
         </div>
     </div>
@@ -77,7 +82,6 @@
 const { cabana_id } = useRoute().params;
 const cabana = await $fetch('/api/cabanas/' + cabana_id,
 );
-console.log(cabana.photos[0]);
 const config = useRuntimeConfig();
 
 
@@ -89,6 +93,12 @@ const onMouseDown = (event) => {
   if (scrollContainer.value) {
     startDragging(event, scrollContainer.value);
   }
+};
+const onWhatsapp = () => {
+    const phone = cabana.phone_number;
+    const message = `Hola, vi un aviso en pichilemucabanas.cl sobre ${cabana.name} y me gustaría obtener más información.`;
+    const uri = `https://wa.me/${phone}?text=${message}`;
+    window.open(uri , '_blank');
 };
 
 //Preview Images
